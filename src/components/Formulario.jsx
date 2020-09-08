@@ -1,11 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Formulario = () => {
+  const [busqueda, setBusqueda] = useState({
+    artista: "",
+    cancion: "",
+  });
+  const [error, setError] = useState(false);
+
+  const { artista, cancion } = busqueda;
+
+  // Actualizar el estado
+  const actualizarState = (e) => {
+    setError(false);
+    setBusqueda({ ...busqueda, [e.target.name]: e.target.value });
+  };
+
+  // Consulta de API
+  const buscarInformacion = (e) => {
+    e.preventDefault();
+
+    // Validar campos
+    if (artista.trim() === "" || cancion.trim() === "") {
+      setError(true);
+      return;
+    }
+
+    // Pasar informacion al componente principal
+  };
+
   return (
     <div className="bg-info">
       <div className="container">
         <div className="row">
-          <form className="col card text-white bg-transparent mb-5 pt-5 pb-2">
+          <form
+            className="col card text-white bg-transparent mb-5 pt-5 pb-2"
+            onSubmit={buscarInformacion}
+          >
             <fieldset>
               <legend className="text-center">Buscador Letras Canciones</legend>
 
@@ -18,6 +48,8 @@ const Formulario = () => {
                       className="form-control"
                       name="artista"
                       placeholder="Nombre Artista"
+                      onChange={actualizarState}
+                      value={artista}
                     />
                   </div>
                 </div>
@@ -29,6 +61,8 @@ const Formulario = () => {
                       className="form-control"
                       name="cancion"
                       placeholder="Nombre Canción"
+                      onChange={actualizarState}
+                      value={cancion}
                     />
                   </div>
                 </div>
