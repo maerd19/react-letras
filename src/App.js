@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Formulario from "./components/Formulario";
+import Cancion from "./components/Cancion";
+
 import axios from "axios";
 
 function App() {
@@ -21,6 +23,15 @@ function App() {
   return (
     <>
       <Formulario setBusquedaLetra={setBusquedaLetra} />
+
+      <div className="container mt-5">
+        <div className="row">
+          <div className="col-md-6"></div>
+          <div className="col-md-6">
+            <Cancion letra={letra} />
+          </div>
+        </div>
+      </div>
     </>
   );
 }
