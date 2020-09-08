@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-const Formulario = () => {
+const Formulario = ({ setBusquedaLetra }) => {
   const [busqueda, setBusqueda] = useState({
     artista: "",
     cancion: "",
@@ -26,10 +27,16 @@ const Formulario = () => {
     }
 
     // Pasar informacion al componente principal
+    setBusquedaLetra(busqueda);
   };
 
   return (
     <div className="bg-info">
+      {error ? (
+        <p className="alert alert-danger text-center p-2">
+          Todos los campos son obligatorios
+        </p>
+      ) : null}
       <div className="container">
         <div className="row">
           <form
@@ -77,6 +84,10 @@ const Formulario = () => {
       </div>
     </div>
   );
+};
+
+Formulario.propTypes = {
+  setBusquedaLetra: PropTypes.func.isRequired,
 };
 
 export default Formulario;
